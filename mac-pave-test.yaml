@@ -56,7 +56,7 @@
     - name: Download 3d Vista
       ansible.builtin.get_url:
         url: https://download.3dvista.com/current/show/3DVVirtualTour_beta.dmg
-        dest: /Users/evanbennett/Downloads/3DVVirtualTour_beta.dmg
+        dest: /Applications/3DVVirtualTour_beta.dmg
         mode: '0440'
 
     # - name: Configure Mac OS settings
