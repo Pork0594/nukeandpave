@@ -10,10 +10,10 @@ brew install python
 pip3 install ansible
 
 # Clone your Ansible playbook repository
-git clone https://github.com/yourusername/your-repo.git
+git clone https://github.com/Pork0594/nukeandpave.git
 
 # Change directory to the cloned repository
-cd your-repo
+cd nukeandpave
 
 # Run the Ansible playbook
-ansible-playbook setup.yml
+ansible-playbook mac-pave-test
