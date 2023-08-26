@@ -1,0 +1,64 @@
+---
+- name: Set up my Mac
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Install Xcode Command Line Tools
+      command: xcode-select --install
+      ignore_errors: yes
+
+    # - name: Install Homebrew
+    #   become: yes
+    #   command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    - name: Install required Homebrew packages
+      become: yes
+      homebrew:
+        name:
+          - mas
+          - python3
+          - git
+
+    - name: Install pip tools
+      become: yes
+      pip:
+        name:
+          - ansible 
+          - ansible-core 
+          - ascii-art 
+
+    - name: Install App Store apps
+      become: yes
+      shell: mas install {{ item }}
+      loop:
+        - 1451685025 # Wiregaurd
+        - 1219074514 # Linearity Curve Graphic Design
+        - 1153157709 # Speedtest by Ookla
+
+    - name: Install Homebrew Casks
+      become: yes
+      homebrew_cask:
+        name:
+          - brave-browser
+          - visual-studio-code
+          - balenaetcher
+
+    # - name: Download and Install DMG apps
+    #   become: yes
+    #   vars:
+    #     dmg_apps:
+    #       - name: 3DVistaVTbeta
+    #         url: https://download.3dvista.com/current/show/3DVVirtualTour_beta.dmg
+    #       - name: MacYTDL 
+    #         url: https://github.com/section83/MacYTDL/releases/download/1.24.1/MacYTDL-v1.24.1.dmg
+    
+    
+    - name: Download 3d Vista
+      ansible.builtin.get_url:
+        url: https://download.3dvista.com/current/show/3DVVirtualTour_beta.dmg
+        dest: /Users/evanbennett/Downloads/3DVVirtualTour_beta.dmg
+        mode: '0440'
+
+    # - name: Configure Mac OS settings
+    #   become: yes
+    #   # Use the 'defaults' command or appropriate modules for settings
