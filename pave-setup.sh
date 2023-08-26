@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if Xcode's Command Line Tools are installed
+if ! command -v git &> /dev/null; then
+    echo "Xcode's Command Line Tools are not installed. Installing..."
+    xcode-select --install
+fi
+
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
